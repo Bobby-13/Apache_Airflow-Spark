@@ -1,0 +1,42 @@
+[2024-05-09T06:33:00.176+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-05-09T06:33:00.289+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: python_operator_v3.Welcome scheduled__2024-05-06T00:00:00+00:00 [queued]>
+[2024-05-09T06:33:00.317+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: python_operator_v3.Welcome scheduled__2024-05-06T00:00:00+00:00 [queued]>
+[2024-05-09T06:33:00.318+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 6
+[2024-05-09T06:33:00.373+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): Welcome> on 2024-05-06 00:00:00+00:00
+[2024-05-09T06:33:00.396+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'python_operator_v3', 'Welcome', 'scheduled__2024-05-06T00:00:00+00:00', '--job-id', '18', '--raw', '--subdir', 'DAGS_FOLDER/python_operator.py', '--cfg-path', '/tmp/tmpzau1t2bl']
+[2024-05-09T06:33:00.404+0000] {standard_task_runner.py:91} INFO - Job 18: Subtask Welcome
+[2024-05-09T06:33:00.418+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=1576) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2024-05-09T06:33:00.421+0000] {standard_task_runner.py:63} INFO - Started process 1577 to run task
+[2024-05-09T06:33:00.574+0000] {task_command.py:426} INFO - Running <TaskInstance: python_operator_v3.Welcome scheduled__2024-05-06T00:00:00+00:00 [running]> on host dab92a57e2e4
+[2024-05-09T06:33:00.948+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='myself' AIRFLOW_CTX_DAG_ID='python_operator_v3' AIRFLOW_CTX_TASK_ID='Welcome' AIRFLOW_CTX_EXECUTION_DATE='2024-05-06T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-05-06T00:00:00+00:00'
+[2024-05-09T06:33:00.951+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-05-09T06:33:01.015+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-05-09T06:33:01.017+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/python_operator.py", line 7, in Greet
+    name = ti.xcom_pull(task_id = 'get_name')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 79, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TaskInstance.xcom_pull() got an unexpected keyword argument 'task_id'
+[2024-05-09T06:33:01.059+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=python_operator_v3, task_id=Welcome, run_id=scheduled__2024-05-06T00:00:00+00:00, execution_date=20240506T000000, start_date=20240509T063300, end_date=20240509T063301
+[2024-05-09T06:33:01.109+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 18 for task Welcome (TaskInstance.xcom_pull() got an unexpected keyword argument 'task_id'; 1577)
+[2024-05-09T06:33:01.162+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-05-09T06:33:01.223+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-05-09T06:33:01.229+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

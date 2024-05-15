@@ -1,0 +1,1 @@
+[2024-05-15T05:05:40.018+0000] {task_context_logger.py:104} ERROR - Executor reports task instance <TaskInstance: sparking_flow_16.submit_spark_job scheduled__2024-05-14T00:00:00+00:00 [queued]> finished (success) although the task says it's queued. (Info: None) Was the task killed externally?
